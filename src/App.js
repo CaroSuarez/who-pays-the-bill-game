@@ -3,6 +3,7 @@ import Stage1 from "./components/stage-1";
 import Stage2 from "./components/stage-2";
 import { AppContext } from "./context";
 
+import "react-toastify/dist/ReactToastify.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../src/style/App.css";
 

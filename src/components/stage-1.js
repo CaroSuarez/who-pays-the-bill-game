@@ -1,6 +1,8 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { Button, Form, Alert } from "react-bootstrap";
 import { AppContext } from "../context";
+import ActionButton from "./action-button";
+import PlayersList from "./players-list";
 
 const Stage1 = () => {
   const textInput = useRef();
@@ -40,33 +42,36 @@ const Stage1 = () => {
         message: "",
       });
 
-      const currentPlayersList = context.playersList;
-      const newPlayersList = [...currentPlayersList, currentInput];
-      context.addPlayer(newPlayersList);
+      context.addPlayer(currentInput);
     }
 
     textInput.current.value = "";
   };
 
-  useEffect(() => {
-    console.log(context.playersList);
-  });
-
   return (
-    <Form onSubmit={handleSumit}>
-      <Form.Group>
-        <Form.Control
-          type="text"
-          placeholder="Add player name"
-          name="player_name"
-          ref={textInput}
+    <>
+      <Form onSubmit={handleSumit}>
+        <Form.Group>
+          <Form.Control
+            type="text"
+            placeholder="Add player name"
+            name="player_name"
+            ref={textInput}
+          />
+        </Form.Group>
+        {inputError.error && <Alert> {inputError.message} </Alert>}
+        <Button className="miami" variant="primary" type="submit">
+          Add player
+        </Button>
+      </Form>
+      {context.playersList.length > 0 && (
+        <PlayersList
+          list={context.playersList}
+          deletePlayer={context.deletePlayer}
         />
-      </Form.Group>
-      {inputError.error && <Alert> {inputError.message} </Alert>}
-      <Button className="miami" variant="primary" type="submit">
-        Add player
-      </Button>
-    </Form>
+      )}
+      <ActionButton nextStage={context.nextStage} />
+    </>
   );
 };
 
