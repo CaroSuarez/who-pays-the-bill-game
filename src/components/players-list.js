@@ -4,10 +4,10 @@ const PlayersList = ({ list, deletePlayer }) => {
   return (
     <>
       <hr />
-      <ul className="players_wrapper list-group">
+      <ul className="list-group">
         {list.map((name) => (
           <li
-            className="list-group-item d-flex justify-content-between"
+            className="list-group-item d-flex justify-content-between align-items-center list-group-item-action"
             key={name}
           >
             <p>{name}</p>
